@@ -6,6 +6,7 @@
   <script language="javascript" src="testrunner.js" type="text/javascript"></script>
   <script language="javascript" src="../jquery.templates.js" type="text/javascript"></script>
   <script language="javascript" src="../jquery.mvc.js" type="text/javascript"></script>
+  <script language="javascript" src="tests.js" type="text/javascript"></script>
   <!-- add a script reference to your library here -->
   <link media="screen" href="testsuite.css" type="text/css" rel="stylesheet"/>
   <style>
@@ -14,36 +15,6 @@
 </head>
 <body>
 
-<script language="javascript" type="text/javascript">
-
-// --- TESTS ---
-module("when instantiating a view");
-test("it should set its name", function(){
-  var view = new $.mvc.View("test_view", $("#view_template"));
-  equals(view.name, "test_view");
-});
-test("it should create a template from source", function() {
-  var view = new $.mvc.View("test_view", "#view_template");
-  ok(view.template instanceof $.Template);
-});
-test("it should accept a template", function() {
-  var template = new $.Template("#view_template");
-  var view = new $.mvc.View("test_view", template);
-  same(view.template, template);
-});
-test("it should build settings from defaults", function() {
-  $.mvc.View.defaults = {"key": "value"}
-  var view = new $.mvc.View("test_view", "#view_template", {"extra":"new_extra_value"});
-  equals(view.settings.key, "value");
-});
-test("it should override defaults with options", function() {
-  $.mvc.View.defaults = {"key": "value", "extra": "extra_value"}
-  var view = new $.mvc.View("test_view", "#view_template", {"extra":"new_extra_value"});
-  equals(view.settings.key, "value");
-  equals(view.settings.extra, "new_extra_value");
-});
-
-</script>
   <!-- qUnit framework HTML -->
   <h1>jquery-mvc-views</h1>
   <h2 id="banner"></h2>
@@ -54,7 +25,7 @@ test("it should override defaults with options", function() {
     <div id="view_template">
       <div class="__class_name__">__content__</div>
     </div>
+    <div id="target"></div>
   </div>
-
 </body>
 </html>
